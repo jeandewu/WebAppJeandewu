@@ -1,7 +1,5 @@
 package data;
 
-import java.util.Objects;
-
 public class Magazine extends Publication {
     private int month;
     private int day;
@@ -40,24 +38,49 @@ public class Magazine extends Publication {
 
     @Override
     public String toString() {
-        return getTitle() + "; " + "; " + getPublisher() + "; " + getYear() + "-"
-                + getMonth() + "-" + getDay() + "; " + getLanguage();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Magazine)) return false;
-        if (!super.equals(o)) return false;
-        Magazine magazine = (Magazine) o;
-        return getMonth() == magazine.getMonth() &&
-                getDay() == magazine.getDay() &&
-                Objects.equals(getLanguage(), magazine.getLanguage());
+        StringBuilder print = new StringBuilder(32);
+        print.append(getTitle());
+        print.append("; ");
+        print.append(getPublisher());
+        print.append("; ");
+        print.append(getYear());
+        print.append("; ");
+        print.append(getMonth());
+        print.append("; ");
+        print.append(getDay());
+        print.append("; ");
+        print.append(getLanguage());
+        return print.toString();
     }
 
     @Override
     public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + day;
+        result = prime * result + ((language == null) ? 0 : language.hashCode());
+        result = prime * result + month;
+        return result;
+    }
 
-        return Objects.hash(super.hashCode(), getMonth(), getDay(), getLanguage());
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Magazine other = (Magazine) obj;
+        if (day != other.day)
+            return false;
+        if (language == null) {
+            if (other.language != null)
+                return false;
+        } else if (!language.equals(other.language))
+            return false;
+        if (month != other.month)
+            return false;
+        return true;
     }
 }

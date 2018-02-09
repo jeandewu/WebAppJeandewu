@@ -1,8 +1,5 @@
 package data;
 
-
-import java.util.Objects;
-
 public class Book extends Publication {
     // Pola
     private String author;
@@ -45,25 +42,52 @@ public class Book extends Publication {
 
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
-        return getTitle() + "; " + getAuthor() + "; " + getYear() + "; " + getPages()
-                + "; " + getPublisher() + "; " + getIsbn();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Book)) return false;
-        if (!super.equals(o)) return false;
-        Book book = (Book) o;
-        return getPages() == book.getPages() &&
-                Objects.equals(getAuthor(), book.getAuthor()) &&
-                Objects.equals(getIsbn(), book.getIsbn());
+        StringBuilder print = new StringBuilder(32);
+        print.append(getTitle());
+        print.append("; ");
+        print.append(getAuthor());
+        print.append("; ");
+        print.append(getYear());
+        print.append("; ");
+        print.append(getPages());
+        print.append("; ");
+        print.append(getPublisher());
+        print.append("; ");
+        print.append(getIsbn());
+        return print.toString();
     }
 
     @Override
     public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + ((author == null) ? 0 : author.hashCode());
+        result = prime * result + ((isbn == null) ? 0 : isbn.hashCode());
+        result = prime * result + pages;
+        return result;
+    }
 
-        return Objects.hash(super.hashCode(), getAuthor(), getPages(), getIsbn());
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Book other = (Book) obj;
+        if (author == null) {
+            if (other.author != null)
+                return false;
+        } else if (!author.equals(other.author))
+            return false;
+        if (isbn == null) {
+            if (other.isbn != null)
+                return false;
+        } else if (!isbn.equals(other.isbn))
+            return false;
+        if (pages != other.pages)
+            return false;
+        return true;
     }
 }
