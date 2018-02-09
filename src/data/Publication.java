@@ -62,5 +62,4 @@ public class Publication {
         return true;
     }
 
-
 }
