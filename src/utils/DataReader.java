@@ -3,7 +3,9 @@ package utils;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+
 import data.Book;
+import data.LibraryUser;
 import data.Magazine;
 
 public class DataReader {
@@ -16,6 +18,18 @@ public class DataReader {
     public void close() {
         sc.close();
     }
+
+    public LibraryUser readAndCreateLibraryUser() {
+        System.out.println("Imię: ");
+        String firstName = sc.nextLine();
+        System.out.println("Nazwisko: ");
+        String lastName = sc.nextLine();
+        System.out.println("PESEL: ");
+        String pesel = sc.nextLine();
+
+        return new LibraryUser(firstName, lastName, pesel);
+    }
+
 
     public int getInt() throws NumberFormatException {
         int number = 0;

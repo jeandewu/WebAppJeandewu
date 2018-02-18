@@ -1,22 +1,22 @@
 package utils;
 
+import java.util.Collection;
+
 import data.Book;
 import data.Library;
+import data.LibraryUser;
 import data.Magazine;
 import data.Publication;
 
-import java.util.Arrays;
-
 public class LibraryUtils {
 
+    //ZMIENIONY TYP  i PĘTLA
     public static void printBooks(Library lib) {
-        Publication[] publications = lib.getPublications();
-        Arrays.sort(publications, new Library.AlphabeticalComparator());
-        int publicationsNumber = lib.getPublicationsNumber();
+        Collection<Publication> publications = lib.getPublications().values();
         int countBooks = 0;
-        for(int i=0; i<publicationsNumber; i++) {
-            if(publications[i] instanceof Book) {
-                System.out.println(publications[i]);
+        for(Publication p: publications) {
+            if(p instanceof Book) {
+                System.out.println(p);
                 countBooks++;
             }
         }
@@ -26,14 +26,23 @@ public class LibraryUtils {
         }
     }
 
+
+    public static void printUsers(Library lib) {
+        Collection<LibraryUser> users = lib.getUsers().values();
+        for(LibraryUser u: users) {
+            System.out.println(u);
+        }
+    }
+
+
+
+    //ZMIENIONY TYP i PĘTLA
     public static void printMagazines(Library lib) {
-        Publication[] publications = lib.getPublications();
-        Arrays.sort(publications, new Library.AlphabeticalComparator());
-        int publicationsNumber = lib.getPublicationsNumber();
+        Collection<Publication> publications = lib.getPublications().values();
         int countMagazines = 0;
-        for(int i=0; i<publicationsNumber; i++) {
-            if(publications[i] instanceof Magazine) {
-                System.out.println(publications[i]);
+        for(Publication p: publications) {
+            if(p instanceof Magazine) {
+                System.out.println(p);
                 countMagazines++;
             }
         }
